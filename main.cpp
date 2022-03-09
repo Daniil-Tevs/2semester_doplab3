@@ -14,11 +14,11 @@ void ADD(DC_List* head,int data)
     tmp->field = data;
     tmp->next = p;
     tmp->prev = head;
-    if(head->next!=nullptr) {
+    if(head->next!=head) {
         p->prev = tmp;
     }
     head->next = tmp;
-    if(head->prev == nullptr)
+    if(head->prev == head)
         head->prev=head->next;
 }
 void INSERT(DC_List* head, int data, int place)
@@ -27,7 +27,7 @@ void INSERT(DC_List* head, int data, int place)
     struct DC_List* tmp = new DC_List;
 //    tmp->field = data;
     int s=1;
-    while(p!= nullptr)
+    while(p!= head)
     {
         if(s==place)
         {
@@ -47,7 +47,7 @@ void DELETE(DC_List* head,int place)
 {
     auto* p = head;
     int s=0;
-    while (p->next != nullptr) {
+    while (p->next != head) {
         if (s + 1 == place) {
             auto* tmp = p->next;
             p->next = p->next->next;
@@ -65,7 +65,7 @@ void DELETE(DC_List* head,int place)
 void printNext(DC_List* head)
 {
     auto* p = head->next;
-    while(p != nullptr)
+    while(p != head)
     {
         std::cout<<p->field<<" ";
         p = p->next;
@@ -84,7 +84,7 @@ void CLEAR(DC_List* head)
 {
     DC_List* tmp;
     auto* p = head->next;
-    while(p != nullptr)
+    while(p != head)
     {
         tmp=p;
         p = p->next;
@@ -95,8 +95,8 @@ void CLEAR(DC_List* head)
 int main() {
     srand(time(0));
     auto* head = new DC_List;
-    head->next = nullptr;
-    head->prev = nullptr;
+    head->next = head;
+    head->prev = head;
     for(int j=0;j<N;j++)
         ADD(head,1+rand()%20);
     printNext(head);
